@@ -1,4 +1,4 @@
-import { Item } from "../model";
+import { Item } from "../../model";
 
 export interface Data {
     items: Item[];

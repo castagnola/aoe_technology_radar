@@ -13,14 +13,16 @@ export default React.forwardRef((props: FilterProps, ref) => {
 });
 
 function FilterRadar({ items, onChange }: FilterProps, ref: any) {
+  const getOnlyRings = () => {
+    const getRings = items.map((elem) => elem.ring);
+    const uniqueRings = Array.from(new Set(getRings));
+    return uniqueRings;
+  };
+
   const [selectedOptions, setSelectedOptions] = React.useState<string[]>([]);
 
   useEffect(() => {
-    const getRings = selectedOptions.map(
-      (elem) => (JSON.parse(elem) as Item).ring
-    );
-    const uniqueRings = Array.from(new Set(getRings));
-    onChange(uniqueRings);
+    onChange(selectedOptions);
   }, [selectedOptions, onChange]);
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -33,9 +35,9 @@ function FilterRadar({ items, onChange }: FilterProps, ref: any) {
 
   return (
     <select multiple value={selectedOptions} onChange={handleSelectChange}>
-      {items.map((elem) => (
-        <option value={JSON.stringify(elem)} key={elem.name}>
-          {elem.title}
+      {getOnlyRings().map((elem) => (
+        <option value={elem} key={elem}>
+          {elem}
         </option>
       ))}
     </select>

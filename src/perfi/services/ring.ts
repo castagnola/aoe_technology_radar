@@ -1,4 +1,4 @@
-import { publicUrl } from "../config";
+import { publicUrl } from "../../config";
 import { Data } from "../interfaces/data";
 
 export async function asygetDataByRing(rings: string[]): Promise<Data> {
