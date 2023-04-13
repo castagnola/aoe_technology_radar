@@ -76,7 +76,7 @@ const RadarChart: React.FC<{
         </g>
 
         {Object.values(config.quadrantsMap).map((value, index) => {
-          console.log(value)
+          // console.log(value)
           return null
         })}
         {Object.values(config.quadrantsMap).map((value, index) => (
