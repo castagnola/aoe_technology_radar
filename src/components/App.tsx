@@ -12,6 +12,9 @@ import { ConfigData, publicUrl } from "../config";
 import { Messages, MessagesProvider } from "../context/MessagesContext";
 import { useSearchParamState } from "../hooks/use-search-param-state";
 import { Item, filteredOnly, getTags } from "../model";
+import FilterRadar from "../perfi/components/FilterRadar/FilterRadar";
+import { Data } from "../perfi/interfaces/data";
+import { asygetDataByRing } from "../perfi/services/ring";
 import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
 import Router from "./Router";
@@ -83,11 +86,6 @@ const FooterWithPageParam = ({ items }: { items: Item[] }) => {
   return <Footer pageName={page || ""} items={filteredItems} />;
 };
 
-interface Data {
-  items: Item[];
-  releases: string[];
-}
-
 export default function App() {
   const data = useFetch<Data>(
     `${publicUrl}rd.json?${process.env.REACT_APP_BUILDHASH}`
@@ -99,8 +97,20 @@ export default function App() {
     `${publicUrl}config.json?${process.env.REACT_APP_BUILDHASH}`
   );
 
+  const [selectedRings, setselectedRings] = React.useState<string[]>([]);
+  const [filteredData, setFilteredData] = React.useState<Data | null>(null);
+
+  const getFilteredData = React.useCallback(async () => {
+    const getDataByRing = await asygetDataByRing(selectedRings);
+    setFilteredData(getDataByRing);
+  }, [selectedRings]);
+
+  React.useEffect(() => {
+    getFilteredData();
+  }, [selectedRings, getFilteredData]);
+
   if (data && config) {
-    const { items, releases } = data;
+    const { items, releases } = filteredData ?? data;
     return (
       <MessagesProvider messages={messages}>
         <BrowserRouter basename={`${publicUrl}`}>
@@ -112,6 +122,10 @@ export default function App() {
                   <div className="page">
                     <div className="page__header">
                       <HeaderWithPageParam items={items} />
+                      <FilterRadar
+                        items={data.items}
+                        onChange={setselectedRings}
+                      />
                     </div>
                     <div className={classNames("page__content")}>
                       <RouterWithPageParam
