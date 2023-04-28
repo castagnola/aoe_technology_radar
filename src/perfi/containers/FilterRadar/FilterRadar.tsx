@@ -5,8 +5,13 @@ import "./filterRadar.scss";
 import FilterIcon from "../../components/FilterIcon/FilterIcon";
 import ModalCheckbox, { CheckBoxItem } from "../../components/ModalCheckbox/ModalCheckbox";
 
+
+type ItemModified = Item & {
+  hub?: string[];
+}
+
 type FilterProps = {
-  items: Item[];
+  items: ItemModified[];
   onChange: (items: string[]) => void;
 };
 
@@ -18,18 +23,17 @@ function FilterRadar({ items, onChange }: FilterProps, ref: any) {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [checkBoxItems, setCheckBoxItems] = useState<CheckBoxItem[]>([]);
 
+  const mapByItemToArray = useCallback(() => (): CheckBoxItem[] => {
+    const arrayItems =  items.map(elem => elem.hub ? elem.hub.map(elem2 => elem2): []).flat();
+    const noRepeatItems = Array.from(new Set(arrayItems));
+    const uniqueItems = noRepeatItems.map(elem => ({name: elem, value: elem, checked: false}));
+    return uniqueItems;
+  },[items])
 
-  const mapItems = useCallback(() => {
-    const unique:any = {};
-    const uniqueItems: Item[] = items.filter(obj => !unique[obj.ring] && (unique[obj.ring] = true));
-    const result: CheckBoxItem[] = uniqueItems.map(elem => ({name: elem.ring, value: elem.ring, checked: false}));
-    setCheckBoxItems(result);
-  },[items]);
   
-
   useEffect(() => {
-    mapItems();
-  },[items, mapItems]);
+    setCheckBoxItems(mapByItemToArray());
+  },[items, mapByItemToArray]);
 
   const handleCloseModal = () => setIsOpenModal(false);
   const handleOpenModal = () => setIsOpenModal(true);
