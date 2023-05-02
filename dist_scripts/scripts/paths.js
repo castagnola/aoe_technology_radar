@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.appNodeModules = exports.appYarnLock = exports.appPublic = exports.appBuild = exports.appRdJson = exports.templateNodeModules = exports.templateBuild = exports.template = exports.radarJson = void 0;
 var fs_1 = require("fs");
 var path_1 = require("path");
-exports.radarJson = "rd.json";
+exports.radarJson = process.env.REACT_APP_JSON;
 var appDirectory = (0, fs_1.realpathSync)(process.cwd());
 var resolveApp = function (relativePath) {
     if (relativePath === void 0) { relativePath = ""; }

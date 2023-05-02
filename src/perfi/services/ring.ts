@@ -2,7 +2,7 @@ import { publicUrl } from "../../config";
 import { Data } from "../interfaces/data";
 
 export async function asygetDataByRing(rings: string[]): Promise<Data> {
-  const url: string = `${publicUrl}rd.json`;
+  const url: string = `${publicUrl}${process.env.REACT_APP_JSON}`;
   const response = await fetch(url, {
     method: "GET",
   });

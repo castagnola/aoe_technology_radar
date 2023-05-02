@@ -88,7 +88,7 @@ const FooterWithPageParam = ({ items }: { items: Item[] }) => {
 
 export default function App() {
   const data = useFetch<Data>(
-    `${publicUrl}rd.json?${process.env.REACT_APP_BUILDHASH}`
+    `${publicUrl}${process.env.REACT_APP_JSON}?${process.env.REACT_APP_BUILDHASH}`
   );
   const messages = useFetch<Messages>(
     `${publicUrl}messages.json?${process.env.REACT_APP_BUILDHASH}`
