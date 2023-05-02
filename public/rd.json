@@ -1,22 +1,38 @@
 {
   "items": [
     {
-      "name": ".NET",
-      "title": ".NET",
+      "name": ".NET MAUI",
+      "title": ".NET MAUI",
       "hub": [
-        "Performance",
-        ".NET "
+        ".NET"
       ],
-      "ring": "trial",
-      "quadrant": "languages-and-frameworks",
+      "ring": "adopt",
+      "quadrant": "tools",
       "isNew": false,
-      "description": "Software framework developed by Microsoft for building Windows applications.",
+      "description": ".NET Multi-platform App UI (MAUI) is a framework for building native user interfaces for mobile, desktop, and web applications using a single codebase. It is an evolution of the Xamarin.Forms framework, and it allows developers to create applications that run on multiple platforms with a consistent user experience.",
       "flag": "new",
       "featured": true,
       "revisions": [],
       "body": "<p>This is Html, nothing else</p>",
       "release": "2023-5-2"
-    },    {
+    },
+    {
+      "name": ".NET Standard",
+      "title": ".NET Standard",
+      "hub": [
+        ".NET"
+      ],
+      "ring": "adopt",
+      "quadrant": "tools",
+      "isNew": false,
+      "description": ".NET Standard is a specification for .NET APIs that ensures compatibility across different .NET implementations, such as .NET Framework, .NET Core, and Xamarin. It provides a common set of APIs that can be used in any .NET application, regardless of the runtime or platform.",
+      "flag": "new",
+      "featured": true,
+      "revisions": [],
+      "body": "<p>This is Html, nothing else</p>",
+      "release": "2023-5-2"
+    },
+    {
       "name": "Accessibility",
       "title": "Accessibility",
       "hub": [
