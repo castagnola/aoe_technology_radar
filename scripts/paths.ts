@@ -1,7 +1,7 @@
 import { realpathSync } from "fs";
 import { resolve } from "path";
 
-export const radarJson = "rd.json";
+export const radarJson = process.env.REACT_APP_JSON;
 const appDirectory = realpathSync(process.cwd());
 const resolveApp = (relativePath = "") => resolve(appDirectory, relativePath);
 const templateDirectory = realpathSync(__dirname);
